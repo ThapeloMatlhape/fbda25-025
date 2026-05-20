@@ -158,6 +158,7 @@ nav a.active {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
+    padding: 0 50px;
 }
 .menu-card {
     background: white;
@@ -175,7 +176,7 @@ nav a.active {
     object-fit: cover;
 }
 .menu-info {
-    padding: 20px;
+    padding: 30px;
     text-align: center;
 }
 .price {

@@ -1,8 +1,5 @@
-
-
 document.addEventListener("DOMContentLoaded", function () {
 
-    
     const header = document.querySelector("header");
     const nav = document.querySelector("nav");
 
@@ -14,7 +11,8 @@ document.addEventListener("DOMContentLoaded", function () {
         font-size: 28px; 
         cursor: pointer; 
         display: none;
-        color: #000;
+        color: white;
+        z-index: 1001;
     `;
     header.insertBefore(hamburger, nav);
 
@@ -32,7 +30,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-
     function setActiveLink() {
         const currentPage = window.location.pathname.split("/").pop() || "index.html";
         nav.querySelectorAll("a").forEach(link => {
@@ -41,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     setActiveLink();
 
-    
+    // Smooth scrolling
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener("click", function (e) {
             if (this.getAttribute("href") !== "#") {
@@ -57,6 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    // Back to top button
     const backToTop = document.createElement("button");
     backToTop.innerHTML = "↑";
     backToTop.className = "back-to-top";
@@ -86,31 +84,26 @@ document.addEventListener("DOMContentLoaded", function () {
         window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
+    // Contact form
     const contactForm = document.querySelector(".contact-form form");
     if (contactForm) {
         contactForm.addEventListener("submit", function (e) {
             e.preventDefault();
-
-            const name = this.querySelector("input[type='text']").value;
-            
+            const name = this.querySelector("input[type='text']")?.value || "";
             if (name.trim() === "") {
                 alert("Please enter your name.");
                 return;
             }
-
-            alert(`✅ Thank you, ${name.split(" ")[0]}!\n\nYour message has been received.\n\nMcDonald's Gaborone will get back to you soon.`);
-            
-            // Reset form
+            alert(`✅ Thank you, ${name.split(" ")[0]}!\n\nYour message has been received.`);
             this.reset();
         });
     }
 
-     
+    // Cart functionality
     function addCartFunctionality() {
         const menuCards = document.querySelectorAll(".menu-card, .card");
-        
         menuCards.forEach(card => {
-            if (card.querySelector("img")) {
+            if (card.querySelector("img") && !card.querySelector(".add-to-cart-btn")) {
                 const btn = document.createElement("button");
                 btn.textContent = "Add to Cart";
                 btn.className = "add-to-cart-btn";
@@ -124,27 +117,20 @@ document.addEventListener("DOMContentLoaded", function () {
                     cursor: pointer;
                     width: 100%;
                 `;
-
                 btn.addEventListener("click", () => {
-                    const itemName = card.querySelector("h3").textContent;
+                    const itemName = card.querySelector("h3")?.textContent || "Item";
                     const priceEl = card.querySelector(".price");
                     const price = priceEl ? priceEl.textContent : "P0.00";
-
                     alert(`🛒 Added to cart: ${itemName} - ${price}`);
-                    
-                    // Optional: You can expand this into a real cart later
                 });
-
-                // Append button only if not already there
-                if (!card.querySelector(".add-to-cart-btn")) {
-                    const info = card.querySelector(".menu-info") || card;
-                    info.appendChild(btn);
-                }
+                const info = card.querySelector(".menu-info") || card;
+                info.appendChild(btn);
             }
         });
     }
-
     addCartFunctionality();
+
+    // Hero fade-in
     const hero = document.querySelector(".hero");
     if (hero) {
         hero.style.opacity = "0";
@@ -153,41 +139,6 @@ document.addEventListener("DOMContentLoaded", function () {
             hero.style.opacity = "1";
         }, 300);
     }
-
-    // ==================== RESPONSIVE HAMBURGER STYLES ====================
-    const style = document.createElement("style");
-    style.innerHTML = `
-        @media (max-width: 768px) {
-            .hamburger { display: block; }
-            nav {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: #FFCC00;
-                flex-direction: column;
-                padding: 15px 0;
-                display: none;
-                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            }
-            nav.active { display: flex; }
-            nav a {
-                padding: 12px 20px;
-                text-align: center;
-                border-bottom: 1px solid rgba(0,0,0,0.1);
-            }
-        }
-        
-        .add-to-cart-btn:hover {
-            background: #c00000 !important;
-            transform: scale(1.03);
-        }
-        
-        .back-to-top:hover {
-            background: #c00000;
-        }
-    `;
-    document.head.appendChild(style);
 
     console.log("✅ McDonald's Gaborone JavaScript Loaded Successfully!");
 });

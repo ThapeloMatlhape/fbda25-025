@@ -35,6 +35,7 @@ header {
     position: sticky;
     top: 0;
     z-index: 1000;
+    width: 100%;
 }
 .logo {
     display: flex;
@@ -79,16 +80,17 @@ nav a.active {
     position: relative;
 }
 .hero-content {
-    color: white;
+    color:black;
     text-align: center;
     max-width: 900px;
     padding: 0 5%;
     z-index: 2;
 }
 .hero h1 {
-    font-size: 50px;
+    font-size: 32px;
     margin-bottom: 10px;
     color: #fffaf0;
+    line-height: 1.2;
 }
 .hero p {
     font-size: 18px;
@@ -393,11 +395,12 @@ footer {
     to { opacity: 1; transform: translateX(0); }
 }
 @media (max-width: 768px) {
-    .hero h1 { font-size: 3rem; }
+    .hero h1 { font-size: 40px; }
     header { 
         flex-direction: column; 
         gap: 1rem; 
         padding: 1rem 5%; 
+
     }
     nav a { margin: 0 1rem; }
     
@@ -419,16 +422,27 @@ footer {
     }
 }
 
-@media (max-width: 600px) {
-    .hero h1 { font-size: 2.5rem; }
+@media (max-width: 768px) {
+    .hero h1 { font-size: 1rem; }
     .footer-grid {
         grid-template-columns: 1fr;
     }
 }
-@media(max-width: 600px){
-    .hero{
+@media  (max-width: 768px;){
+    .header{
         flex-direction: column;
-        text-align: center;
-        padding: 20px;
+        
     }
+    .nav{
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .nav a{
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+    }
+    
 }
